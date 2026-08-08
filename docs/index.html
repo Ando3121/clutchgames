@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ClutchGames — NBA Daily Digest</title>
+<meta name="description" content="Spoiler-free NBA game summaries, ranked by how close the game was.">
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #ffffff;
+    --bg-card: #f6f7f9;
+    --text: #14171a;
+    --text-dim: #5b6169;
+    --border: #e3e5e8;
+    --accent: #d84a4a;
+    --dot-on: #d84a4a;
+    --dot-off: #d8dadd;
+    --btn-bg: #14171a;
+    --btn-text: #ffffff;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f1115;
+      --bg-card: #1a1d23;
+      --text: #f2f3f5;
+      --text-dim: #9aa0a8;
+      --border: #2a2e35;
+      --accent: #ff6b6b;
+      --dot-on: #ff6b6b;
+      --dot-off: #33373f;
+      --btn-bg: #f2f3f5;
+      --btn-text: #14171a;
+    }
+  }
+  :root[data-theme="light"] {
+    --bg: #ffffff; --bg-card: #f6f7f9; --text: #14171a; --text-dim: #5b6169;
+    --border: #e3e5e8; --accent: #d84a4a; --dot-on: #d84a4a; --dot-off: #d8dadd;
+    --btn-bg: #14171a; --btn-text: #ffffff;
+  }
+  :root[data-theme="dark"] {
+    --bg: #0f1115; --bg-card: #1a1d23; --text: #f2f3f5; --text-dim: #9aa0a8;
+    --border: #2a2e35; --accent: #ff6b6b; --dot-on: #ff6b6b; --dot-off: #33373f;
+    --btn-bg: #f2f3f5; --btn-text: #14171a;
+  }
+
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0; background: var(--bg); color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    overflow-x: hidden;
+  }
+  main {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 32px 20px 64px;
+  }
+  header { margin-bottom: 24px; }
+  h1 {
+    font-size: 1.5rem;
+    margin: 0 0 4px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .subtitle { color: var(--text-dim); font-size: 0.95rem; margin: 0; }
+  .date-picker {
+    margin-top: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .date-picker select {
+    background: var(--bg-card);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 6px 10px;
+    font-size: 0.9rem;
+  }
+
+  .game-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 16px 18px;
+    margin-bottom: 12px;
+  }
+  .game-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+  }
+  .matchup {
+    font-weight: 600;
+    font-size: 1.05rem;
+  }
+  .rank-badge {
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .closeness-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  .dots { font-size: 1rem; letter-spacing: 2px; }
+  .dots .on { color: var(--dot-on); }
+  .dots .off { color: var(--dot-off); }
+  .rating-label { font-size: 0.9rem; color: var(--text-dim); }
+
+  .reveal-btn {
+    margin-top: 12px;
+    background: transparent;
+    color: var(--text-dim);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-size: 0.85rem;
+    cursor: pointer;
+  }
+  .reveal-btn:hover { border-color: var(--text-dim); color: var(--text); }
+
+  .score-panel {
+    display: none;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px dashed var(--border);
+    font-size: 0.95rem;
+  }
+  .score-panel.shown { display: block; }
+  .score-panel .team-line {
+    display: flex;
+    justify-content: space-between;
+    padding: 2px 0;
+  }
+  .score-panel .winner { font-weight: 700; }
+
+  .status-msg {
+    color: var(--text-dim);
+    text-align: center;
+    padding: 40px 0;
+  }
+  .status-msg.error { color: var(--accent); }
+
+  footer {
+    text-align: center;
+    color: var(--text-dim);
+    font-size: 0.8rem;
+    margin-top: 40px;
+  }
+  footer a { color: inherit; }
+
+  /* Reserved ad space — no network wired in yet, just holds layout so a
+     future ad doesn't cause content to jump. */
+  .ad-slot {
+    margin: 20px 0;
+    min-height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-card);
+    border: 1px dashed var(--border);
+    border-radius: 10px;
+    color: var(--text-dim);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>🏀 ClutchGames</h1>
+    <p class="subtitle" id="subtitle">Spoiler-free NBA results, ranked by how close the game was.</p>
+    <div class="date-picker" id="date-picker" style="display:none;">
+      <label for="date-select" style="color:var(--text-dim); font-size:0.9rem;">Date:</label>
+      <select id="date-select"></select>
+    </div>
+  </header>
+
+  <div class="ad-slot" id="ad-slot-top">Advertisement</div>
+
+  <div id="games-container">
+    <p class="status-msg" id="status">Loading games…</p>
+  </div>
+
+  <footer>
+    Scores hidden by default — click "Reveal score" to see the result.
+  </footer>
+</main>
+
+<script src="app.js"></script>
+</body>
+</html>

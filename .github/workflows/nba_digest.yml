@@ -1,0 +1,45 @@
+name: NBA Daily Digest
+
+on:
+  schedule:
+    - cron: "0 7 * * *"   # 07:00 UTC daily, after US games have finished
+  workflow_dispatch:
+    inputs:
+      target_date:
+        description: "Override date to fetch (YYYY-MM-DD), for testing/backfill. Leave blank for normal 'yesterday UTC' behavior."
+        required: false
+        type: string
+
+permissions:
+  contents: write   # needed so the workflow can commit updated docs/data/ files back to the repo
+
+jobs:
+  fetch-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install -r requirements.txt
+
+      - run: python nba_digest_website.py
+        env:
+          SPORTRADAR_KEY: ${{ secrets.SPORTRADAR_KEY }}
+          SPREADSHEET_ID: ${{ secrets.SPREADSHEET_ID }}
+          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
+          TARGET_DATE: ${{ inputs.target_date }}
+
+      - name: Commit updated data files
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/data
+          if git diff --cached --quiet; then
+            echo "No data changes to commit."
+          else
+            git commit -m "Update NBA digest data"
+            git push
+          fi
