@@ -1,0 +1,21 @@
+{
+  "sport": "nba",
+  "date": "2026-05-20",
+  "games": [
+    {
+      "date": "2026-05-20",
+      "away": "San Antonio Spurs",
+      "away_abbr": "SAS",
+      "away_score": 113,
+      "home": "Oklahoma City Thunder",
+      "home_abbr": "OKC",
+      "home_score": 122,
+      "winner": "Oklahoma City Thunder",
+      "loser": "San Antonio Spurs",
+      "margin": 9,
+      "closeness": 3,
+      "rating": "Some drama",
+      "dots": "\u25cf\u25cf\u25cf\u25cb\u25cb"
+    }
+  ]
+}

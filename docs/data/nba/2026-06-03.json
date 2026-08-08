@@ -1,0 +1,21 @@
+{
+  "sport": "nba",
+  "date": "2026-06-03",
+  "games": [
+    {
+      "date": "2026-06-03",
+      "away": "New York Knicks",
+      "away_abbr": "NYK",
+      "away_score": 105,
+      "home": "San Antonio Spurs",
+      "home_abbr": "SAS",
+      "home_score": 95,
+      "winner": "New York Knicks",
+      "loser": "San Antonio Spurs",
+      "margin": 10,
+      "closeness": 3,
+      "rating": "Some drama",
+      "dots": "\u25cf\u25cf\u25cf\u25cb\u25cb"
+    }
+  ]
+}
