@@ -11,13 +11,10 @@
 const SPORT = "nba";
 const DATA_DIR = `data/${SPORT}`;
 
-const DOTS_ON = "●";
-const DOTS_OFF = "○";
-
-function dotsHtml(score) {
+function meterHtml(score) {
   let html = "";
-  for (let i = 0; i < 5; i++) {
-    html += `<span class="${i < score ? "on" : "off"}">${i < score ? DOTS_ON : DOTS_OFF}</span>`;
+  for (let i = 1; i <= 5; i++) {
+    html += `<span class="seg${i <= score ? " on" : ""}"></span>`;
   }
   return html;
 }
@@ -30,50 +27,76 @@ function fmtDateLabel(dateStr) {
   });
 }
 
+function buildStub(g, idx, isHero) {
+  const stub = document.createElement("article");
+  stub.className = "stub" + (isHero ? " hero" : "");
+
+  const away = g.away_abbr || g.away;
+  const home = g.home_abbr || g.home;
+  const seedLabel = isHero ? "Game of the Night" : `Seed ${idx + 1}`;
+
+  stub.innerHTML = `
+    <div class="stub-top">
+      <div class="matchup">${away} @ ${home}</div>
+      <div class="rank-seed">${seedLabel}</div>
+    </div>
+    <div class="meter-row">
+      <span class="meter">${meterHtml(g.closeness)}</span>
+      <span class="rating-label">${g.rating}</span>
+    </div>
+    <div class="perf" aria-hidden="true"></div>
+    <div class="flip-zone">
+      <div class="flip-card">
+        <div class="flip-inner">
+          <button class="flip-face flip-front" type="button" aria-label="Reveal final score for ${away} at ${home}">
+            <span>Sealed — tap to reveal</span>
+          </button>
+          <div class="flip-face flip-back" aria-hidden="true">
+            <span class="team${g.winner === g.away ? " winner" : ""}">
+              <span class="at">${away}</span> <span class="score">${g.away_score}</span>
+            </span>
+            <span class="team${g.winner === g.home ? " winner" : ""}">
+              <span class="at">${home}</span> <span class="score">${g.home_score}</span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  const flipCard = stub.querySelector(".flip-card");
+  const front = stub.querySelector(".flip-front");
+  const back = stub.querySelector(".flip-back");
+  front.addEventListener("click", () => {
+    flipCard.classList.add("revealed");
+    // backface-visibility only hides content visually - screen readers can
+    // still reach it regardless of rotation, so the seal has to be enforced
+    // in the accessibility tree too, not just in CSS.
+    back.setAttribute("aria-hidden", "false");
+    front.setAttribute("aria-hidden", "true");
+    front.setAttribute("tabindex", "-1");
+  });
+
+  return stub;
+}
+
 function renderGames(games) {
   const container = document.getElementById("games-container");
   container.innerHTML = "";
 
   const sorted = [...games].sort((a, b) => b.closeness - a.closeness);
+  const [top, ...rest] = sorted;
 
-  sorted.forEach((g, idx) => {
-    const card = document.createElement("div");
-    card.className = "game-card";
+  container.appendChild(buildStub(top, 0, true));
 
-    const away = g.away_abbr || g.away;
-    const home = g.home_abbr || g.home;
+  if (rest.length) {
+    const label = document.createElement("div");
+    label.className = "section-label";
+    label.textContent = "Rest of the slate";
+    container.appendChild(label);
 
-    card.innerHTML = `
-      <div class="game-top">
-        <div class="matchup">${away} @ ${home}</div>
-        <div class="rank-badge">#${idx + 1}</div>
-      </div>
-      <div class="closeness-row">
-        <span class="dots">${dotsHtml(g.closeness)}</span>
-        <span class="rating-label">${g.rating}</span>
-      </div>
-      <button class="reveal-btn" type="button">🔒 Reveal score</button>
-      <div class="score-panel">
-        <div class="team-line">
-          <span>${g.away}</span>
-          <span class="${g.winner === g.away ? "winner" : ""}">${g.away_score}</span>
-        </div>
-        <div class="team-line">
-          <span>${g.home}</span>
-          <span class="${g.winner === g.home ? "winner" : ""}">${g.home_score}</span>
-        </div>
-      </div>
-    `;
-
-    const btn = card.querySelector(".reveal-btn");
-    const panel = card.querySelector(".score-panel");
-    btn.addEventListener("click", () => {
-      const shown = panel.classList.toggle("shown");
-      btn.textContent = shown ? "🔓 Hide score" : "🔒 Reveal score";
-    });
-
-    container.appendChild(card);
-  });
+    rest.forEach((g, i) => container.appendChild(buildStub(g, i + 1, false)));
+  }
 }
 
 async function fetchJson(path) {

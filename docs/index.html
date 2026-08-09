@@ -3,185 +3,350 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ClutchGames — NBA Daily Digest</title>
-<meta name="description" content="Spoiler-free NBA game summaries, ranked by how close the game was.">
+<title>ClutchGames — Spoiler-Free NBA Digest</title>
+<meta name="description" content="Last night's NBA games, ranked by how close they were. Scores stay sealed until you choose to reveal them.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Libre+Franklin:ital,wght@0,400;0,500;0,600;0,700;1,500&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
 <style>
+  /* ── Design tokens ─────────────────────────────────────────────────── */
   :root {
     color-scheme: light dark;
-    --bg: #ffffff;
-    --bg-card: #f6f7f9;
-    --text: #14171a;
-    --text-dim: #5b6169;
-    --border: #e3e5e8;
-    --accent: #d84a4a;
-    --dot-on: #d84a4a;
-    --dot-off: #d8dadd;
-    --btn-bg: #14171a;
-    --btn-text: #ffffff;
+    --ground:    #171310;
+    --surface:   #221D17;
+    --surface-2: #2B241C;
+    --ink:       #F3EDE3;
+    --ink-dim:   #A89A87;
+    --line:      #3A3226;
+    --accent:    #C89B3C;
+    --accent-ink: #171310;
+    --accent-2:  #6FA88A;
+    --meter-off: #3A3226;
   }
-  @media (prefers-color-scheme: dark) {
+  @media (prefers-color-scheme: light) {
     :root {
-      --bg: #0f1115;
-      --bg-card: #1a1d23;
-      --text: #f2f3f5;
-      --text-dim: #9aa0a8;
-      --border: #2a2e35;
-      --accent: #ff6b6b;
-      --dot-on: #ff6b6b;
-      --dot-off: #33373f;
-      --btn-bg: #f2f3f5;
-      --btn-text: #14171a;
+      --ground:    #F6F1E7;
+      --surface:   #FFFCF6;
+      --surface-2: #FBF5E9;
+      --ink:       #221D17;
+      --ink-dim:   #8A7C68;
+      --line:      #E4D9C4;
+      --accent:    #A87B22;
+      --accent-ink: #FFFCF6;
+      --accent-2:  #3F6E56;
+      --meter-off: #E4D9C4;
     }
   }
-  :root[data-theme="light"] {
-    --bg: #ffffff; --bg-card: #f6f7f9; --text: #14171a; --text-dim: #5b6169;
-    --border: #e3e5e8; --accent: #d84a4a; --dot-on: #d84a4a; --dot-off: #d8dadd;
-    --btn-bg: #14171a; --btn-text: #ffffff;
-  }
   :root[data-theme="dark"] {
-    --bg: #0f1115; --bg-card: #1a1d23; --text: #f2f3f5; --text-dim: #9aa0a8;
-    --border: #2a2e35; --accent: #ff6b6b; --dot-on: #ff6b6b; --dot-off: #33373f;
-    --btn-bg: #f2f3f5; --btn-text: #14171a;
+    --ground: #171310; --surface: #221D17; --surface-2: #2B241C;
+    --ink: #F3EDE3; --ink-dim: #A89A87; --line: #3A3226;
+    --accent: #C89B3C; --accent-ink: #171310; --accent-2: #6FA88A; --meter-off: #3A3226;
+  }
+  :root[data-theme="light"] {
+    --ground: #F6F1E7; --surface: #FFFCF6; --surface-2: #FBF5E9;
+    --ink: #221D17; --ink-dim: #8A7C68; --line: #E4D9C4;
+    --accent: #A87B22; --accent-ink: #FFFCF6; --accent-2: #3F6E56; --meter-off: #E4D9C4;
   }
 
   * { box-sizing: border-box; }
   html, body {
-    margin: 0; padding: 0; background: var(--bg); color: var(--text);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    margin: 0; padding: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: "Libre Franklin", sans-serif;
     overflow-x: hidden;
   }
+  body { -webkit-font-smoothing: antialiased; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
   main {
-    max-width: 720px;
+    max-width: 640px;
     margin: 0 auto;
-    padding: 32px 20px 64px;
-  }
-  header { margin-bottom: 24px; }
-  h1 {
-    font-size: 1.5rem;
-    margin: 0 0 4px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .subtitle { color: var(--text-dim); font-size: 0.95rem; margin: 0; }
-  .date-picker {
-    margin-top: 16px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    flex-wrap: wrap;
-  }
-  .date-picker select {
-    background: var(--bg-card);
-    color: var(--text);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 6px 10px;
-    font-size: 0.9rem;
+    padding: 40px 20px 72px;
   }
 
-  .game-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 16px 18px;
-    margin-bottom: 12px;
+  /* ── Header / marquee ─────────────────────────────────────────────── */
+  header { margin-bottom: 32px; }
+  .wordmark {
+    font-family: "Big Shoulders Display", sans-serif;
+    font-weight: 900;
+    font-size: clamp(2.4rem, 9vw, 3.2rem);
+    line-height: 0.9;
+    letter-spacing: 0.01em;
+    margin: 0;
+    color: var(--ink);
   }
-  .game-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 12px;
-  }
-  .matchup {
+  .wordmark .clutch { color: var(--accent); }
+  .eyebrow {
+    font-family: "Libre Franklin", sans-serif;
     font-weight: 600;
-    font-size: 1.05rem;
-  }
-  .rank-badge {
-    font-size: 0.75rem;
-    color: var(--text-dim);
-    font-weight: 600;
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
-    letter-spacing: 0.04em;
+    color: var(--accent);
+    margin: 0 0 6px;
   }
-  .closeness-row {
+  .tagline {
+    font-family: "Libre Franklin", sans-serif;
+    font-style: italic;
+    font-weight: 500;
+    color: var(--ink-dim);
+    font-size: 0.95rem;
+    margin: 10px 0 0;
+  }
+  .marquee-rule {
+    height: 3px;
+    margin-top: 18px;
+    background: repeating-linear-gradient(
+      90deg, var(--accent) 0 14px, transparent 14px 22px
+    );
+  }
+
+  .date-picker {
+    margin-top: 20px;
     display: flex;
     align-items: center;
     gap: 10px;
-    margin-top: 10px;
+    flex-wrap: wrap;
   }
-  .dots { font-size: 1rem; letter-spacing: 2px; }
-  .dots .on { color: var(--dot-on); }
-  .dots .off { color: var(--dot-off); }
-  .rating-label { font-size: 0.9rem; color: var(--text-dim); }
+  .date-picker label {
+    font-family: "Libre Franklin", sans-serif;
+    font-weight: 600;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+  }
+  .date-picker select {
+    background: var(--surface);
+    color: var(--ink);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 7px 10px;
+    font-family: "Libre Franklin", sans-serif;
+    font-weight: 500;
+    font-size: 0.9rem;
+  }
 
-  .reveal-btn {
-    margin-top: 12px;
-    background: transparent;
-    color: var(--text-dim);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 6px 12px;
+  /* ── Section labels ───────────────────────────────────────────────── */
+  .section-label {
+    font-family: "Big Shoulders Display", sans-serif;
+    font-weight: 800;
     font-size: 0.85rem;
-    cursor: pointer;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+    margin: 36px 0 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
   }
-  .reveal-btn:hover { border-color: var(--text-dim); color: var(--text); }
+  .section-label::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+  }
 
-  .score-panel {
-    display: none;
-    margin-top: 12px;
-    padding-top: 12px;
-    border-top: 1px dashed var(--border);
-    font-size: 0.95rem;
+  /* ── Closeness meter (scoreboard LED bars) ───────────────────────── */
+  .meter {
+    display: flex;
+    gap: 4px;
+    align-items: flex-end;
+    height: 20px;
   }
-  .score-panel.shown { display: block; }
-  .score-panel .team-line {
+  .meter .seg {
+    width: 7px;
+    border-radius: 1px;
+    background: var(--meter-off);
+  }
+  .meter .seg.on { background: var(--accent); }
+  .meter .seg:nth-child(1) { height: 40%; }
+  .meter .seg:nth-child(2) { height: 55%; }
+  .meter .seg:nth-child(3) { height: 70%; }
+  .meter .seg:nth-child(4) { height: 85%; }
+  .meter .seg:nth-child(5) { height: 100%; }
+  .hero .meter .seg { width: 10px; }
+
+  .rating-label {
+    font-family: "Libre Franklin", sans-serif;
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: var(--ink-dim);
+  }
+
+  /* ── Stub card (shared) ───────────────────────────────────────────── */
+  .stub {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    margin-bottom: 14px;
+  }
+  .stub-top {
+    padding: 16px 18px;
     display: flex;
     justify-content: space-between;
-    padding: 2px 0;
+    align-items: flex-start;
+    gap: 12px;
   }
-  .score-panel .winner { font-weight: 700; }
+  .matchup {
+    font-family: "Big Shoulders Display", sans-serif;
+    font-weight: 800;
+    font-size: 1.4rem;
+    letter-spacing: 0.01em;
+    line-height: 1.1;
+  }
+  .rank-seed {
+    font-family: "IBM Plex Mono", monospace;
+    font-weight: 600;
+    font-size: 0.72rem;
+    color: var(--ink-dim);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 3px 6px;
+    white-space: nowrap;
+  }
+  .meter-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 18px 16px;
+  }
 
+  /* ── Perforated tear divider ──────────────────────────────────────── */
+  .perf {
+    position: relative;
+    height: 0;
+    border-top: 2px dashed var(--line);
+    margin: 0 14px;
+  }
+  .perf::before, .perf::after {
+    content: "";
+    position: absolute;
+    top: -8px;
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    background: var(--ground);
+  }
+  .perf::before { left: -22px; }
+  .perf::after { right: -22px; }
+
+  /* ── Flip stub (reveal mechanic) ──────────────────────────────────── */
+  .flip-zone {
+    padding: 14px 18px 18px;
+  }
+  .flip-card {
+    perspective: 900px;
+    height: 46px;
+  }
+  .flip-inner {
+    position: relative;
+    width: 100%; height: 100%;
+    transition: transform 0.5s cubic-bezier(.4,.2,.2,1);
+    transform-style: preserve-3d;
+  }
+  .flip-card.revealed .flip-inner { transform: rotateX(180deg); }
+  .flip-face {
+    position: absolute; inset: 0;
+    backface-visibility: hidden;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .flip-front {
+    appearance: none;
+    margin: 0;
+    background: transparent;
+    border: 1px dashed var(--line);
+    color: var(--ink-dim);
+    font-family: "Libre Franklin", sans-serif;
+    font-weight: 600;
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    gap: 8px;
+  }
+  .flip-front:hover { border-color: var(--accent); color: var(--accent); }
+  .flip-back {
+    background: var(--surface-2);
+    transform: rotateX(180deg);
+    font-family: "IBM Plex Mono", monospace;
+    font-variant-numeric: tabular-nums;
+    font-size: 0.95rem;
+    gap: 18px;
+    padding: 0 14px;
+  }
+  .flip-back .team {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .flip-back .team.winner { color: var(--accent-2); font-weight: 600; }
+  .flip-back .score { font-weight: 600; }
+  .flip-back .at { color: var(--ink-dim); font-family: "Libre Franklin", sans-serif; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .flip-inner { transition: none; }
+  }
+
+  /* ── Hero (Game of the Night) ─────────────────────────────────────── */
+  .hero .matchup { font-size: clamp(1.7rem, 6vw, 2.1rem); }
+  .hero .stub-top { padding: 20px 20px 4px; }
+  .hero .meter-row { padding: 4px 20px 18px; }
+  .hero .flip-zone { padding: 16px 20px 20px; }
+  .hero .flip-card { height: 56px; }
+  .hero .flip-back { font-size: 1.1rem; }
+  .hero {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 1px var(--accent) inset;
+  }
+
+  /* ── Status / empty states ────────────────────────────────────────── */
   .status-msg {
-    color: var(--text-dim);
+    color: var(--ink-dim);
     text-align: center;
-    padding: 40px 0;
+    padding: 48px 0;
+    font-family: "Libre Franklin", sans-serif;
   }
   .status-msg.error { color: var(--accent); }
 
-  footer {
-    text-align: center;
-    color: var(--text-dim);
-    font-size: 0.8rem;
-    margin-top: 40px;
-  }
-  footer a { color: inherit; }
-
-  /* Reserved ad space — no network wired in yet, just holds layout so a
-     future ad doesn't cause content to jump. */
+  /* ── Ad slot ───────────────────────────────────────────────────────── */
   .ad-slot {
-    margin: 20px 0;
+    margin: 28px 0;
     min-height: 90px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--bg-card);
-    border: 1px dashed var(--border);
-    border-radius: 10px;
-    color: var(--text-dim);
-    font-size: 0.7rem;
+    background: var(--surface);
+    border: 1px dashed var(--line);
+    border-radius: 6px;
+    color: var(--ink-dim);
+    font-family: "Libre Franklin", sans-serif;
+    font-size: 0.68rem;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.1em;
+  }
+
+  footer {
+    text-align: center;
+    color: var(--ink-dim);
+    font-family: "Libre Franklin", sans-serif;
+    font-size: 0.8rem;
+    margin-top: 44px;
   }
 </style>
 </head>
 <body>
 <main>
   <header>
-    <h1>🏀 ClutchGames</h1>
-    <p class="subtitle" id="subtitle">Spoiler-free NBA results, ranked by how close the game was.</p>
+    <p class="eyebrow">Spoiler-Free Digest</p>
+    <h1 class="wordmark">Clutch<span class="clutch">Games</span></h1>
+    <p class="tagline" id="subtitle">Last night's slate, ranked by closeness — sealed until you look.</p>
+    <div class="marquee-rule" aria-hidden="true"></div>
     <div class="date-picker" id="date-picker" style="display:none;">
-      <label for="date-select" style="color:var(--text-dim); font-size:0.9rem;">Date:</label>
+      <label for="date-select">Date</label>
       <select id="date-select"></select>
     </div>
   </header>
@@ -193,7 +358,7 @@
   </div>
 
   <footer>
-    Scores hidden by default — click "Reveal score" to see the result.
+    Scores stay sealed until you flip the stub.
   </footer>
 </main>
 
