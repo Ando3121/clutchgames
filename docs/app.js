@@ -11,6 +11,17 @@
 const SPORT = "nba";
 const DATA_DIR = `data/${SPORT}`;
 
+// balldontlie.io abbreviations mostly match ESPN's logo CDN slugs directly
+// (lowercased), except these two - verified against ESPN's CDN directly
+// rather than assumed, since abbreviation conventions differ across sports
+// data providers.
+const LOGO_SLUG_OVERRIDES = { NOP: "no", UTA: "utah" };
+
+function logoUrl(abbr) {
+  const slug = LOGO_SLUG_OVERRIDES[abbr] || abbr.toLowerCase();
+  return `https://a.espncdn.com/i/teamlogos/nba/500/${slug}.png`;
+}
+
 function meterHtml(score) {
   let html = "";
   for (let i = 1; i <= 5; i++) {
@@ -27,76 +38,98 @@ function fmtDateLabel(dateStr) {
   });
 }
 
-function buildStub(g, idx, isHero) {
-  const stub = document.createElement("article");
-  stub.className = "stub" + (isHero ? " hero" : "");
+// ── Reveal state: tracked by game id so it survives re-sorting ────────────────
+let revealedIds = new Set();
 
-  const away = g.away_abbr || g.away;
-  const home = g.home_abbr || g.home;
-  const seedLabel = isHero ? "Game of the Night" : `Seed ${idx + 1}`;
+function teamCellHtml(name, abbr) {
+  return `
+    <span class="team-cell">
+      <img class="logo" src="${logoUrl(abbr)}" alt="" width="24" height="24" loading="lazy"
+           onerror="this.style.visibility='hidden'">
+      <span class="team-name">${abbr || name}</span>
+    </span>
+  `;
+}
 
-  stub.innerHTML = `
-    <div class="stub-top">
-      <div class="matchup">${away} @ ${home}</div>
-      <div class="rank-seed">${seedLabel}</div>
-    </div>
-    <div class="meter-row">
-      <span class="meter">${meterHtml(g.closeness)}</span>
-      <span class="rating-label">${g.rating}</span>
-    </div>
-    <div class="perf" aria-hidden="true"></div>
-    <div class="flip-zone">
-      <div class="flip-card">
-        <div class="flip-inner">
-          <button class="flip-face flip-front" type="button" aria-label="Reveal final score for ${away} at ${home}">
-            <span>Sealed — tap to reveal</span>
-          </button>
-          <div class="flip-face flip-back" aria-hidden="true">
-            <span class="team${g.winner === g.away ? " winner" : ""}">
-              <span class="at">${away}</span> <span class="score">${g.away_score}</span>
-            </span>
-            <span class="team${g.winner === g.home ? " winner" : ""}">
-              <span class="at">${home}</span> <span class="score">${g.home_score}</span>
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
+function buildRow(g) {
+  const tr = document.createElement("tr");
+  tr.innerHTML = `
+    <td>${teamCellHtml(g.away, g.away_abbr)}</td>
+    <td class="at-cell">@</td>
+    <td>${teamCellHtml(g.home, g.home_abbr)}</td>
+    <td class="closeness-cell">
+      <span class="closeness-inner">
+        <span class="meter">${meterHtml(g.closeness)}</span>
+        <span class="rating-label">${g.rating}</span>
+      </span>
+    </td>
+    <td class="score-cell"></td>
   `;
 
-  const flipCard = stub.querySelector(".flip-card");
-  const front = stub.querySelector(".flip-front");
-  const back = stub.querySelector(".flip-back");
-  front.addEventListener("click", () => {
-    flipCard.classList.add("revealed");
-    // backface-visibility only hides content visually - screen readers can
-    // still reach it regardless of rotation, so the seal has to be enforced
-    // in the accessibility tree too, not just in CSS.
-    back.setAttribute("aria-hidden", "false");
-    front.setAttribute("aria-hidden", "true");
-    front.setAttribute("tabindex", "-1");
+  const scoreCell = tr.querySelector(".score-cell");
+  const btn = document.createElement("button");
+  btn.type = "button";
+  btn.className = "reveal-btn";
+  scoreCell.appendChild(btn);
+
+  function paint(revealed) {
+    if (revealed) {
+      btn.classList.add("revealed");
+      const awayWin = g.winner === g.away ? "win" : "";
+      const homeWin = g.winner === g.home ? "win" : "";
+      btn.innerHTML =
+        `<span class="${awayWin}">${g.away_score}</span>` +
+        `<span class="dash">–</span>` +
+        `<span class="${homeWin}">${g.home_score}</span>`;
+      btn.setAttribute(
+        "aria-label",
+        `${g.away} ${g.away_score}, ${g.home} ${g.home_score}` +
+          (g.winner ? `, ${g.winner} won` : "")
+      );
+    } else {
+      btn.classList.remove("revealed");
+      btn.textContent = "Reveal";
+      btn.setAttribute("aria-label", `Reveal final score for ${g.away} at ${g.home}`);
+    }
+  }
+
+  paint(revealedIds.has(g.id));
+
+  btn.addEventListener("click", () => {
+    const nowRevealed = !revealedIds.has(g.id);
+    if (nowRevealed) revealedIds.add(g.id);
+    else revealedIds.delete(g.id);
+    paint(nowRevealed);
   });
 
-  return stub;
+  return tr;
+}
+
+let currentGames = [];
+let currentSort = "time";
+
+function renderTable() {
+  const tbody = document.getElementById("games-tbody");
+  tbody.innerHTML = "";
+
+  const sorted = [...currentGames].sort((a, b) =>
+    currentSort === "closeness"
+      ? b.closeness - a.closeness
+      : new Date(a.datetime) - new Date(b.datetime)
+  );
+
+  sorted.forEach((g) => tbody.appendChild(buildRow(g)));
+
+  const revealAllBtn = document.getElementById("reveal-all");
+  const allRevealed = sorted.length > 0 && sorted.every((g) => revealedIds.has(g.id));
+  revealAllBtn.textContent = allRevealed ? "Hide all scores" : "Show all scores";
+  revealAllBtn.classList.toggle("active", allRevealed);
 }
 
 function renderGames(games) {
-  const container = document.getElementById("games-container");
-  container.innerHTML = "";
-
-  const sorted = [...games].sort((a, b) => b.closeness - a.closeness);
-  const [top, ...rest] = sorted;
-
-  container.appendChild(buildStub(top, 0, true));
-
-  if (rest.length) {
-    const label = document.createElement("div");
-    label.className = "section-label";
-    label.textContent = "Rest of the slate";
-    container.appendChild(label);
-
-    rest.forEach((g, i) => container.appendChild(buildStub(g, i + 1, false)));
-  }
+  currentGames = games;
+  revealedIds = new Set();
+  renderTable();
 }
 
 async function fetchJson(path) {
@@ -105,8 +138,27 @@ async function fetchJson(path) {
   return res.json();
 }
 
+function setupControls() {
+  document.querySelectorAll(".sort-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      currentSort = btn.dataset.sort;
+      document.querySelectorAll(".sort-btn").forEach((b) => b.classList.toggle("active", b === btn));
+      renderTable();
+    });
+  });
+
+  document.getElementById("reveal-all").addEventListener("click", () => {
+    const allRevealed = currentGames.length > 0 && currentGames.every((g) => revealedIds.has(g.id));
+    revealedIds = allRevealed ? new Set() : new Set(currentGames.map((g) => g.id));
+    renderTable();
+  });
+}
+
 async function main() {
   const statusEl = document.getElementById("status");
+  const wrap = document.getElementById("games-wrap");
+  setupControls();
+
   try {
     const dates = await fetchJson(`${DATA_DIR}/index.json`);
 
@@ -130,19 +182,22 @@ async function main() {
     const cache = {};
     async function showDate(d) {
       subtitle.textContent = fmtDateLabel(d);
-      statusEl.textContent = "Loading games…";
+      wrap.style.display = "none";
       statusEl.style.display = "block";
+      statusEl.textContent = "Loading games…";
       try {
         if (!cache[d]) {
           const dayData = await fetchJson(`${DATA_DIR}/${d}.json`);
           cache[d] = dayData.games;
         }
         statusEl.style.display = "none";
+        wrap.style.display = "block";
         renderGames(cache[d]);
       } catch (err) {
         console.error(err);
         statusEl.textContent = "Couldn't load that day's games.";
         statusEl.classList.add("error");
+        statusEl.style.display = "block";
       }
     }
 

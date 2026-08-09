@@ -3,21 +3,8 @@
   "date": "2026-01-15",
   "games": [
     {
-      "date": "2026-01-15",
-      "away": "Phoenix Suns",
-      "away_abbr": "PHX",
-      "away_score": 105,
-      "home": "Detroit Pistons",
-      "home_abbr": "DET",
-      "home_score": 108,
-      "winner": "Detroit Pistons",
-      "loser": "Phoenix Suns",
-      "margin": 3,
-      "closeness": 5,
-      "rating": "Thriller",
-      "dots": "\u25cf\u25cf\u25cf\u25cf\u25cf"
-    },
-    {
+      "id": 18447392,
+      "datetime": "2026-01-15T19:00:00.000Z",
       "date": "2026-01-15",
       "away": "Memphis Grizzlies",
       "away_abbr": "MEM",
@@ -33,6 +20,25 @@
       "dots": "\u25cf\u25cf\u25cf\u25cf\u25cb"
     },
     {
+      "id": 18447393,
+      "datetime": "2026-01-16T00:00:00.000Z",
+      "date": "2026-01-15",
+      "away": "Phoenix Suns",
+      "away_abbr": "PHX",
+      "away_score": 105,
+      "home": "Detroit Pistons",
+      "home_abbr": "DET",
+      "home_score": 108,
+      "winner": "Detroit Pistons",
+      "loser": "Phoenix Suns",
+      "margin": 3,
+      "closeness": 5,
+      "rating": "Thriller",
+      "dots": "\u25cf\u25cf\u25cf\u25cf\u25cf"
+    },
+    {
+      "id": 18447394,
+      "datetime": "2026-01-16T00:30:00.000Z",
       "date": "2026-01-15",
       "away": "Boston Celtics",
       "away_abbr": "BOS",
@@ -48,21 +54,8 @@
       "dots": "\u25cf\u25cf\u25cf\u25cf\u25cb"
     },
     {
-      "date": "2026-01-15",
-      "away": "New York Knicks",
-      "away_abbr": "NYK",
-      "away_score": 113,
-      "home": "Golden State Warriors",
-      "home_abbr": "GSW",
-      "home_score": 126,
-      "winner": "Golden State Warriors",
-      "loser": "New York Knicks",
-      "margin": 13,
-      "closeness": 3,
-      "rating": "Some drama",
-      "dots": "\u25cf\u25cf\u25cf\u25cb\u25cb"
-    },
-    {
+      "id": 18447395,
+      "datetime": "2026-01-16T00:30:00.000Z",
       "date": "2026-01-15",
       "away": "Oklahoma City Thunder",
       "away_abbr": "OKC",
@@ -78,6 +71,8 @@
       "dots": "\u25cf\u25cf\u25cb\u25cb\u25cb"
     },
     {
+      "id": 18447396,
+      "datetime": "2026-01-16T01:00:00.000Z",
       "date": "2026-01-15",
       "away": "Milwaukee Bucks",
       "away_abbr": "MIL",
@@ -93,6 +88,8 @@
       "dots": "\u25cf\u25cf\u25cb\u25cb\u25cb"
     },
     {
+      "id": 18447397,
+      "datetime": "2026-01-16T01:30:00.000Z",
       "date": "2026-01-15",
       "away": "Utah Jazz",
       "away_abbr": "UTA",
@@ -108,6 +105,25 @@
       "dots": "\u25cf\u25cf\u25cb\u25cb\u25cb"
     },
     {
+      "id": 18447398,
+      "datetime": "2026-01-16T03:00:00.000Z",
+      "date": "2026-01-15",
+      "away": "New York Knicks",
+      "away_abbr": "NYK",
+      "away_score": 113,
+      "home": "Golden State Warriors",
+      "home_abbr": "GSW",
+      "home_score": 126,
+      "winner": "Golden State Warriors",
+      "loser": "New York Knicks",
+      "margin": 13,
+      "closeness": 3,
+      "rating": "Some drama",
+      "dots": "\u25cf\u25cf\u25cf\u25cb\u25cb"
+    },
+    {
+      "id": 18447399,
+      "datetime": "2026-01-16T03:00:00.000Z",
       "date": "2026-01-15",
       "away": "Atlanta Hawks",
       "away_abbr": "ATL",
@@ -123,6 +139,8 @@
       "dots": "\u25cf\u25cf\u25cb\u25cb\u25cb"
     },
     {
+      "id": 18447400,
+      "datetime": "2026-01-16T03:30:00.000Z",
       "date": "2026-01-15",
       "away": "Charlotte Hornets",
       "away_abbr": "CHA",

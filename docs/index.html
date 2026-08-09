@@ -60,7 +60,7 @@
   :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 
   main {
-    max-width: 640px;
+    max-width: 780px;
     margin: 0 auto;
     padding: 40px 20px 72px;
   }
@@ -128,35 +128,16 @@
     font-size: 0.9rem;
   }
 
-  /* ── Section labels ───────────────────────────────────────────────── */
-  .section-label {
-    font-family: "Big Shoulders Display", sans-serif;
-    font-weight: 800;
-    font-size: 0.85rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--ink-dim);
-    margin: 36px 0 12px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .section-label::after {
-    content: "";
-    flex: 1;
-    height: 1px;
-    background: var(--line);
-  }
-
   /* ── Closeness meter (scoreboard LED bars) ───────────────────────── */
   .meter {
     display: flex;
-    gap: 4px;
+    gap: 3px;
     align-items: flex-end;
-    height: 20px;
+    height: 16px;
+    flex: none;
   }
   .meter .seg {
-    width: 7px;
+    width: 5px;
     border-radius: 1px;
     background: var(--meter-off);
   }
@@ -166,142 +147,149 @@
   .meter .seg:nth-child(3) { height: 70%; }
   .meter .seg:nth-child(4) { height: 85%; }
   .meter .seg:nth-child(5) { height: 100%; }
-  .hero .meter .seg { width: 10px; }
 
   .rating-label {
     font-family: "Libre Franklin", sans-serif;
     font-weight: 600;
-    font-size: 0.85rem;
+    font-size: 0.82rem;
     color: var(--ink-dim);
-  }
-
-  /* ── Stub card (shared) ───────────────────────────────────────────── */
-  .stub {
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    margin-bottom: 14px;
-  }
-  .stub-top {
-    padding: 16px 18px;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 12px;
-  }
-  .matchup {
-    font-family: "Big Shoulders Display", sans-serif;
-    font-weight: 800;
-    font-size: 1.4rem;
-    letter-spacing: 0.01em;
-    line-height: 1.1;
-  }
-  .rank-seed {
-    font-family: "IBM Plex Mono", monospace;
-    font-weight: 600;
-    font-size: 0.72rem;
-    color: var(--ink-dim);
-    border: 1px solid var(--line);
-    border-radius: 3px;
-    padding: 3px 6px;
     white-space: nowrap;
   }
-  .meter-row {
+
+  /* ── Controls row: sort toggle + reveal-all ───────────────────────── */
+  .controls-row {
     display: flex;
+    justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
     gap: 12px;
-    padding: 0 18px 16px;
+    margin: 32px 0 14px;
   }
+  .sort-toggle {
+    display: inline-flex;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .sort-btn {
+    appearance: none;
+    margin: 0;
+    border: none;
+    background: var(--surface);
+    color: var(--ink-dim);
+    font-family: "Libre Franklin", sans-serif;
+    font-weight: 600;
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    padding: 7px 12px;
+    cursor: pointer;
+  }
+  .sort-btn + .sort-btn { border-left: 1px solid var(--line); }
+  .sort-btn.active { background: var(--accent); color: var(--accent-ink); }
 
-  /* ── Perforated tear divider ──────────────────────────────────────── */
-  .perf {
-    position: relative;
-    height: 0;
-    border-top: 2px dashed var(--line);
-    margin: 0 14px;
+  .reveal-all-btn {
+    appearance: none;
+    margin: 0;
+    background: transparent;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    border-radius: 6px;
+    font-family: "Libre Franklin", sans-serif;
+    font-weight: 600;
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    padding: 8px 14px;
+    cursor: pointer;
   }
-  .perf::before, .perf::after {
-    content: "";
-    position: absolute;
-    top: -8px;
-    width: 16px; height: 16px;
-    border-radius: 50%;
-    background: var(--ground);
-  }
-  .perf::before { left: -22px; }
-  .perf::after { right: -22px; }
+  .reveal-all-btn:hover { background: var(--accent); color: var(--accent-ink); }
+  .reveal-all-btn.active { background: var(--accent); color: var(--accent-ink); }
 
-  /* ── Flip stub (reveal mechanic) ──────────────────────────────────── */
-  .flip-zone {
-    padding: 14px 18px 18px;
+  /* ── Games table ───────────────────────────────────────────────────── */
+  .table-scroll {
+    overflow-x: auto;
+    border: 1px solid var(--line);
+    border-radius: 8px;
   }
-  .flip-card {
-    perspective: 900px;
-    height: 46px;
+  table.games-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--surface);
   }
-  .flip-inner {
-    position: relative;
-    width: 100%; height: 100%;
-    transition: transform 0.5s cubic-bezier(.4,.2,.2,1);
-    transform-style: preserve-3d;
+  .games-table th {
+    text-align: left;
+    font-family: "Libre Franklin", sans-serif;
+    font-weight: 600;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+    padding: 10px 14px;
+    border-bottom: 2px solid var(--accent);
+    white-space: nowrap;
   }
-  .flip-card.revealed .flip-inner { transform: rotateX(180deg); }
-  .flip-face {
-    position: absolute; inset: 0;
-    backface-visibility: hidden;
-    border-radius: 5px;
+  .games-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--line);
+    vertical-align: middle;
+  }
+  .games-table tbody tr:last-child td { border-bottom: none; }
+  .games-table tbody tr:nth-child(even) { background: var(--surface-2); }
+
+  .team-cell {
     display: flex;
     align-items: center;
-    justify-content: center;
+    gap: 8px;
+    white-space: nowrap;
   }
-  .flip-front {
+  .team-cell .logo { width: 24px; height: 24px; object-fit: contain; flex: none; }
+  .team-cell .team-name {
+    font-family: "Big Shoulders Display", sans-serif;
+    font-weight: 700;
+    font-size: 1.05rem;
+    letter-spacing: 0.01em;
+  }
+  .at-cell {
+    color: var(--ink-dim);
+    font-family: "Libre Franklin", sans-serif;
+    font-size: 0.8rem;
+    text-align: center;
+    width: 1%;
+  }
+  .closeness-cell { min-width: 150px; }
+  .closeness-inner { display: flex; align-items: center; gap: 10px; }
+
+  .score-cell { text-align: right; }
+  .reveal-btn {
     appearance: none;
     margin: 0;
     background: transparent;
     border: 1px dashed var(--line);
     color: var(--ink-dim);
+    border-radius: 5px;
     font-family: "Libre Franklin", sans-serif;
     font-weight: 600;
-    font-size: 0.78rem;
-    letter-spacing: 0.1em;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
+    padding: 6px 12px;
     cursor: pointer;
-    gap: 8px;
+    white-space: nowrap;
   }
-  .flip-front:hover { border-color: var(--accent); color: var(--accent); }
-  .flip-back {
-    background: var(--surface-2);
-    transform: rotateX(180deg);
+  .reveal-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .reveal-btn.revealed {
+    border-style: solid;
+    border-color: var(--line);
+    color: var(--ink);
     font-family: "IBM Plex Mono", monospace;
     font-variant-numeric: tabular-nums;
-    font-size: 0.95rem;
-    gap: 18px;
-    padding: 0 14px;
+    font-size: 0.88rem;
+    text-transform: none;
+    letter-spacing: 0;
+    cursor: default;
   }
-  .flip-back .team {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .flip-back .team.winner { color: var(--accent-2); font-weight: 600; }
-  .flip-back .score { font-weight: 600; }
-  .flip-back .at { color: var(--ink-dim); font-family: "Libre Franklin", sans-serif; }
-
-  @media (prefers-reduced-motion: reduce) {
-    .flip-inner { transition: none; }
-  }
-
-  /* ── Hero (Game of the Night) ─────────────────────────────────────── */
-  .hero .matchup { font-size: clamp(1.7rem, 6vw, 2.1rem); }
-  .hero .stub-top { padding: 20px 20px 4px; }
-  .hero .meter-row { padding: 4px 20px 18px; }
-  .hero .flip-zone { padding: 16px 20px 20px; }
-  .hero .flip-card { height: 56px; }
-  .hero .flip-back { font-size: 1.1rem; }
-  .hero {
-    border-color: var(--accent);
-    box-shadow: 0 0 0 1px var(--accent) inset;
-  }
+  .reveal-btn.revealed:hover { border-color: var(--line); color: var(--ink); }
+  .reveal-btn .win { color: var(--accent-2); font-weight: 700; }
+  .reveal-btn .dash { color: var(--ink-dim); margin: 0 5px; }
 
   /* ── Status / empty states ────────────────────────────────────────── */
   .status-msg {
@@ -353,12 +341,34 @@
 
   <div class="ad-slot" id="ad-slot-top">Advertisement</div>
 
-  <div id="games-container">
-    <p class="status-msg" id="status">Loading games…</p>
+  <p class="status-msg" id="status">Loading games…</p>
+
+  <div id="games-wrap" style="display:none;">
+    <div class="controls-row">
+      <div class="sort-toggle" role="group" aria-label="Sort games by">
+        <button class="sort-btn active" type="button" data-sort="time">Kickoff order</button>
+        <button class="sort-btn" type="button" data-sort="closeness">Closeness</button>
+      </div>
+      <button class="reveal-all-btn" type="button" id="reveal-all">Show all scores</button>
+    </div>
+    <div class="table-scroll">
+      <table class="games-table">
+        <thead>
+          <tr>
+            <th scope="col">Away</th>
+            <th scope="col"></th>
+            <th scope="col">Home</th>
+            <th scope="col">Closeness</th>
+            <th scope="col">Score</th>
+          </tr>
+        </thead>
+        <tbody id="games-tbody"></tbody>
+      </table>
+    </div>
   </div>
 
   <footer>
-    Scores stay sealed until you flip the stub.
+    Scores stay sealed until you reveal them.
   </footer>
 </main>
 

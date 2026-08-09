@@ -79,6 +79,8 @@ def fetch_games_for_date(date_label):
         level, label = closeness(home_score, away_score)
 
         games.append({
+            "id":         g["id"],
+            "datetime":   g["datetime"],  # game start time, ISO UTC - used for chronological sort
             "date":       date_label,
             "away":       away["full_name"],
             "away_abbr":  away["abbreviation"],
@@ -94,7 +96,7 @@ def fetch_games_for_date(date_label):
             "dots":       dots(level),
         })
 
-    games.sort(key=lambda g: g["closeness"], reverse=True)
+    games.sort(key=lambda g: g["datetime"])
     return games
 
 # ── Merge newly-finished games into that date's JSON file ─────────────────────
@@ -121,7 +123,7 @@ def merge_into_json(date_label, new_games):
     if not existing_games:
         return 0  # nothing published or newly found for this date - write nothing
 
-    existing_games.sort(key=lambda g: g["closeness"], reverse=True)
+    existing_games.sort(key=lambda g: g["datetime"])
     day_file.write_text(json.dumps(
         {"sport": "nba", "date": date_label, "games": existing_games},
         indent=2,
