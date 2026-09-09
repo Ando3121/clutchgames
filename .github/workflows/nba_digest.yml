@@ -9,6 +9,14 @@ on:
         description: "Override date to fetch (YYYY-MM-DD), for testing/backfill. Leave blank for normal 'today+yesterday ET' behavior."
         required: false
         type: string
+      start_date:
+        description: "Backfill range start (YYYY-MM-DD). Takes priority over target_date. Loops every date through end_date (or today if blank)."
+        required: false
+        type: string
+      end_date:
+        description: "Backfill range end (YYYY-MM-DD). Only used when start_date is set; defaults to today (ET)."
+        required: false
+        type: string
 
 permissions:
   contents: write   # needed so the workflow can commit updated docs/data/ files back to the repo
@@ -27,6 +35,8 @@ jobs:
         env:
           BALLDONTLIE_API_KEY: ${{ secrets.BALLDONTLIE_API_KEY }}
           TARGET_DATE: ${{ inputs.target_date }}
+          START_DATE: ${{ inputs.start_date }}
+          END_DATE: ${{ inputs.end_date }}
 
       - name: Commit updated data files
         run: |

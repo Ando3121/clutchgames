@@ -19,6 +19,7 @@ since no other sport exists in this project.
 
 import os
 import json
+import time
 import urllib.request
 from datetime import datetime, timedelta
 from pathlib import Path
@@ -30,6 +31,16 @@ BALLDONTLIE_API_KEY = os.environ["BALLDONTLIE_API_KEY"]
 # (format YYYY-MM-DD). Unset in normal hourly runs, which check "today and
 # yesterday" in US Eastern time.
 TARGET_DATE = os.environ.get("TARGET_DATE")
+
+# Optional range override for bulk backfilling (format YYYY-MM-DD). END_DATE
+# defaults to today (ET) when START_DATE is set but END_DATE isn't. Takes
+# priority over TARGET_DATE.
+START_DATE = os.environ.get("START_DATE")
+END_DATE = os.environ.get("END_DATE")
+
+# Conservative pause between API calls so a multi-day backfill doesn't trip
+# balldontlie.io's rate limit. Not needed for the normal 2-date hourly run.
+BACKFILL_THROTTLE_SECS = 2
 
 # Where the site's data files live, relative to this script's location
 # (this script sits at the repo root, docs/ is served by GitHub Pages).
@@ -51,6 +62,14 @@ def dots(score):
 
 # ── Which game-dates to check this run ────────────────────────────────────────
 def dates_to_check():
+    if START_DATE:
+        start = datetime.strptime(START_DATE, "%Y-%m-%d").date()
+        end = (
+            datetime.strptime(END_DATE, "%Y-%m-%d").date()
+            if END_DATE else datetime.now(ET).date()
+        )
+        span = (end - start).days
+        return [(start + timedelta(days=i)).isoformat() for i in range(span + 1)]
     if TARGET_DATE:
         return [TARGET_DATE]
     today_et = datetime.now(ET).date()
@@ -140,8 +159,10 @@ def merge_into_json(date_label, new_games):
 
 # ── Main ────────────────────────────────────────────────────────────────────────
 if __name__ == "__main__":
+    dates = dates_to_check()
+    is_backfill = bool(START_DATE)
     total_added = 0
-    for date_label in dates_to_check():
+    for i, date_label in enumerate(dates):
         print(f"Checking {date_label}...")
         games = fetch_games_for_date(date_label)
         print(f"  Found {len(games)} completed game(s)")
@@ -149,6 +170,8 @@ if __name__ == "__main__":
         if added:
             print(f"  ✅ Added {added} new game(s) to {date_label}.json")
         total_added += added
+        if is_backfill and i < len(dates) - 1:
+            time.sleep(BACKFILL_THROTTLE_SECS)
 
     if total_added:
         print(f"Done — {total_added} new game(s) published. 🏀")
