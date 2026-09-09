@@ -3,49 +3,25 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ClutchGames — Spoiler-Free NBA Digest</title>
+<title>ClutchGamesHub — Spoiler-Free NBA Digest</title>
 <meta name="description" content="Last night's NBA games, ranked by how close they were. Scores stay sealed until you choose to reveal them.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Libre+Franklin:ital,wght@0,400;0,500;0,600;0,700;1,500&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Work+Sans:ital,wght@0,400;0,500;0,600;0,700;1,500&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
 <style>
-  /* ── Design tokens ─────────────────────────────────────────────────── */
+  /* ── Design tokens — "Arena Night": a deliberate single dark look ────── */
   :root {
-    color-scheme: light dark;
-    --ground:    #171310;
-    --surface:   #221D17;
-    --surface-2: #2B241C;
-    --ink:       #F3EDE3;
-    --ink-dim:   #A89A87;
-    --line:      #3A3226;
-    --accent:    #C89B3C;
-    --accent-ink: #171310;
-    --accent-2:  #6FA88A;
-    --meter-off: #3A3226;
-  }
-  @media (prefers-color-scheme: light) {
-    :root {
-      --ground:    #F6F1E7;
-      --surface:   #FFFCF6;
-      --surface-2: #FBF5E9;
-      --ink:       #221D17;
-      --ink-dim:   #8A7C68;
-      --line:      #E4D9C4;
-      --accent:    #A87B22;
-      --accent-ink: #FFFCF6;
-      --accent-2:  #3F6E56;
-      --meter-off: #E4D9C4;
-    }
-  }
-  :root[data-theme="dark"] {
-    --ground: #171310; --surface: #221D17; --surface-2: #2B241C;
-    --ink: #F3EDE3; --ink-dim: #A89A87; --line: #3A3226;
-    --accent: #C89B3C; --accent-ink: #171310; --accent-2: #6FA88A; --meter-off: #3A3226;
-  }
-  :root[data-theme="light"] {
-    --ground: #F6F1E7; --surface: #FFFCF6; --surface-2: #FBF5E9;
-    --ink: #221D17; --ink-dim: #8A7C68; --line: #E4D9C4;
-    --accent: #A87B22; --accent-ink: #FFFCF6; --accent-2: #3F6E56; --meter-off: #E4D9C4;
+    color-scheme: dark;
+    --ground:    #0D1420;
+    --surface:   #131C2B;
+    --surface-2: #182236;
+    --ink:       #E7EEF9;
+    --ink-dim:   #7C8CA6;
+    --line:      #263349;
+    --accent:    #4FC3F7;
+    --accent-ink: #0D1420;
+    --accent-2:  #F0784F;
+    --meter-off: #263349;
   }
 
   * { box-sizing: border-box; }
@@ -53,7 +29,7 @@
     margin: 0; padding: 0;
     background: var(--ground);
     color: var(--ink);
-    font-family: "Libre Franklin", sans-serif;
+    font-family: "Work Sans", sans-serif;
     overflow-x: hidden;
   }
   body { -webkit-font-smoothing: antialiased; }
@@ -67,8 +43,11 @@
 
   /* ── Header / marquee ─────────────────────────────────────────────── */
   header { margin-bottom: 32px; }
+  .brand-row { display: flex; align-items: center; gap: 14px; }
+  .crest { flex: none; width: 52px; height: auto; }
+  .brand-row .wordmark { margin: 0; }
   .wordmark {
-    font-family: "Big Shoulders Display", sans-serif;
+    font-family: "Barlow Condensed", sans-serif;
     font-weight: 900;
     font-size: clamp(2.4rem, 9vw, 3.2rem);
     line-height: 0.9;
@@ -78,7 +57,7 @@
   }
   .wordmark .clutch { color: var(--accent); }
   .eyebrow {
-    font-family: "Libre Franklin", sans-serif;
+    font-family: "Work Sans", sans-serif;
     font-weight: 600;
     font-size: 0.72rem;
     letter-spacing: 0.16em;
@@ -87,7 +66,7 @@
     margin: 0 0 6px;
   }
   .tagline {
-    font-family: "Libre Franklin", sans-serif;
+    font-family: "Work Sans", sans-serif;
     font-style: italic;
     font-weight: 500;
     color: var(--ink-dim);
@@ -110,7 +89,7 @@
     flex-wrap: wrap;
   }
   .date-picker label {
-    font-family: "Libre Franklin", sans-serif;
+    font-family: "Work Sans", sans-serif;
     font-weight: 600;
     font-size: 0.72rem;
     letter-spacing: 0.1em;
@@ -123,7 +102,7 @@
     border: 1px solid var(--line);
     border-radius: 4px;
     padding: 7px 10px;
-    font-family: "Libre Franklin", sans-serif;
+    font-family: "Work Sans", sans-serif;
     font-weight: 500;
     font-size: 0.9rem;
   }
@@ -149,7 +128,7 @@
   .meter .seg:nth-child(5) { height: 100%; }
 
   .rating-label {
-    font-family: "Libre Franklin", sans-serif;
+    font-family: "Work Sans", sans-serif;
     font-weight: 600;
     font-size: 0.82rem;
     color: var(--ink-dim);
@@ -177,7 +156,7 @@
     border: none;
     background: var(--surface);
     color: var(--ink-dim);
-    font-family: "Libre Franklin", sans-serif;
+    font-family: "Work Sans", sans-serif;
     font-weight: 600;
     font-size: 0.78rem;
     letter-spacing: 0.04em;
@@ -194,7 +173,7 @@
     border: 1px solid var(--accent);
     color: var(--accent);
     border-radius: 6px;
-    font-family: "Libre Franklin", sans-serif;
+    font-family: "Work Sans", sans-serif;
     font-weight: 600;
     font-size: 0.78rem;
     letter-spacing: 0.04em;
@@ -217,7 +196,7 @@
   }
   .games-table th {
     text-align: left;
-    font-family: "Libre Franklin", sans-serif;
+    font-family: "Work Sans", sans-serif;
     font-weight: 600;
     font-size: 0.68rem;
     letter-spacing: 0.1em;
@@ -243,14 +222,14 @@
   }
   .team-cell .logo { width: 24px; height: 24px; object-fit: contain; flex: none; }
   .team-cell .team-name {
-    font-family: "Big Shoulders Display", sans-serif;
+    font-family: "Barlow Condensed", sans-serif;
     font-weight: 700;
     font-size: 1.05rem;
     letter-spacing: 0.01em;
   }
   .at-cell {
     color: var(--ink-dim);
-    font-family: "Libre Franklin", sans-serif;
+    font-family: "Work Sans", sans-serif;
     font-size: 0.8rem;
     text-align: center;
     width: 1%;
@@ -266,7 +245,7 @@
     border: 1px dashed var(--line);
     color: var(--ink-dim);
     border-radius: 5px;
-    font-family: "Libre Franklin", sans-serif;
+    font-family: "Work Sans", sans-serif;
     font-weight: 600;
     font-size: 0.72rem;
     letter-spacing: 0.06em;
@@ -296,7 +275,7 @@
     color: var(--ink-dim);
     text-align: center;
     padding: 48px 0;
-    font-family: "Libre Franklin", sans-serif;
+    font-family: "Work Sans", sans-serif;
   }
   .status-msg.error { color: var(--accent); }
 
@@ -311,7 +290,7 @@
     border: 1px dashed var(--line);
     border-radius: 6px;
     color: var(--ink-dim);
-    font-family: "Libre Franklin", sans-serif;
+    font-family: "Work Sans", sans-serif;
     font-size: 0.68rem;
     text-transform: uppercase;
     letter-spacing: 0.1em;
@@ -320,7 +299,7 @@
   footer {
     text-align: center;
     color: var(--ink-dim);
-    font-family: "Libre Franklin", sans-serif;
+    font-family: "Work Sans", sans-serif;
     font-size: 0.8rem;
     margin-top: 44px;
   }
@@ -330,7 +309,18 @@
 <main>
   <header>
     <p class="eyebrow">Spoiler-Free Digest</p>
-    <h1 class="wordmark">Clutch<span class="clutch">Games</span></h1>
+    <div class="brand-row">
+      <svg class="crest" viewBox="0 0 100 120" aria-hidden="true">
+        <clipPath id="shieldClip"><path d="M50 6 L88 18 V52 C88 80 70 98 50 112 C30 98 12 80 12 52 V18 Z"/></clipPath>
+        <g clip-path="url(#shieldClip)">
+          <rect x="0" y="0" width="50" height="120" fill="var(--accent)"/>
+          <rect x="50" y="0" width="50" height="120" fill="var(--accent-2)"/>
+          <path d="M12 48 Q50 64 88 48" stroke="var(--ground)" stroke-width="4" fill="none"/>
+        </g>
+        <path d="M50 6 L88 18 V52 C88 80 70 98 50 112 C30 98 12 80 12 52 V18 Z" fill="none" stroke="var(--ink)" stroke-width="4"/>
+      </svg>
+      <h1 class="wordmark">Clutch<span class="clutch">GamesHub</span></h1>
+    </div>
     <p class="tagline" id="subtitle">Last night's slate, ranked by closeness — sealed until you look.</p>
     <div class="marquee-rule" aria-hidden="true"></div>
     <div class="date-picker" id="date-picker" style="display:none;">
