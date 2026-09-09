@@ -20,6 +20,7 @@ since no other sport exists in this project.
 import os
 import json
 import time
+import urllib.error
 import urllib.request
 from datetime import datetime, timedelta
 from pathlib import Path
@@ -39,8 +40,10 @@ START_DATE = os.environ.get("START_DATE")
 END_DATE = os.environ.get("END_DATE")
 
 # Conservative pause between API calls so a multi-day backfill doesn't trip
-# balldontlie.io's rate limit. Not needed for the normal 2-date hourly run.
-BACKFILL_THROTTLE_SECS = 2
+# balldontlie.io's rate limit (free tier appears to allow ~5 requests/minute -
+# confirmed by hitting a 429 after 5 rapid calls during testing). Not needed
+# for the normal 2-date hourly run.
+BACKFILL_THROTTLE_SECS = 13
 
 # Where the site's data files live, relative to this script's location
 # (this script sits at the repo root, docs/ is served by GitHub Pages).
@@ -77,11 +80,22 @@ def dates_to_check():
     return [d.isoformat() for d in (yesterday_et, today_et)]
 
 # ── Fetch completed games for one date from balldontlie.io ────────────────────
-def fetch_games_for_date(date_label):
+def fetch_games_for_date(date_label, max_retries=5):
     url = f"https://api.balldontlie.io/v1/games?dates[]={date_label}"
     req = urllib.request.Request(url, headers={"Authorization": BALLDONTLIE_API_KEY})
-    with urllib.request.urlopen(req, timeout=15) as resp:
-        data = json.loads(resp.read())
+
+    for attempt in range(max_retries):
+        try:
+            with urllib.request.urlopen(req, timeout=15) as resp:
+                data = json.loads(resp.read())
+            break
+        except urllib.error.HTTPError as e:
+            if e.code == 429 and attempt < max_retries - 1:
+                wait = int(e.headers.get("Retry-After", 20))
+                print(f"  Rate limited - waiting {wait}s before retry ({attempt + 1}/{max_retries})...")
+                time.sleep(wait)
+                continue
+            raise
 
     games = []
     for g in data.get("data", []):
