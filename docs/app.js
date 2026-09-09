@@ -30,6 +30,16 @@ function meterHtml(score) {
   return html;
 }
 
+function fmtMonthLabel(dateStr) {
+  const d = new Date(dateStr + "T00:00:00Z");
+  return d.toLocaleDateString("en-US", { month: "long", year: "numeric", timeZone: "UTC" });
+}
+
+function fmtDayOptionLabel(dateStr) {
+  const d = new Date(dateStr + "T00:00:00Z");
+  return d.toLocaleDateString("en-US", { weekday: "long", day: "numeric", timeZone: "UTC" });
+}
+
 function fmtDateLabel(dateStr) {
   const d = new Date(dateStr + "T00:00:00Z");
   if (isNaN(d)) return dateStr;
@@ -171,11 +181,22 @@ async function main() {
     const select = document.getElementById("date-select");
     const subtitle = document.getElementById("subtitle");
 
+    // dates arrives newest-first from index.json, so same-month dates are
+    // already contiguous - no extra sorting needed to group them.
+    let currentGroupLabel = null;
+    let currentGroup = null;
     dates.forEach((d) => {
+      const groupLabel = fmtMonthLabel(d);
+      if (groupLabel !== currentGroupLabel) {
+        currentGroupLabel = groupLabel;
+        currentGroup = document.createElement("optgroup");
+        currentGroup.label = groupLabel;
+        select.appendChild(currentGroup);
+      }
       const opt = document.createElement("option");
       opt.value = d;
-      opt.textContent = fmtDateLabel(d);
-      select.appendChild(opt);
+      opt.textContent = fmtDayOptionLabel(d);
+      currentGroup.appendChild(opt);
     });
     picker.style.display = dates.length > 1 ? "flex" : "none";
 
