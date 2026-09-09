@@ -1,0 +1,57 @@
+{
+  "sport": "nba",
+  "date": "2026-04-23",
+  "games": [
+    {
+      "id": 21681977,
+      "datetime": "2026-04-23T23:00:00.000Z",
+      "date": "2026-04-23",
+      "away": "New York Knicks",
+      "away_abbr": "NYK",
+      "away_score": 108,
+      "home": "Atlanta Hawks",
+      "home_abbr": "ATL",
+      "home_score": 109,
+      "winner": "Atlanta Hawks",
+      "loser": "New York Knicks",
+      "margin": 1,
+      "closeness": 5,
+      "rating": "Thriller",
+      "dots": "\u25cf\u25cf\u25cf\u25cf\u25cf"
+    },
+    {
+      "id": 21681978,
+      "datetime": "2026-04-24T00:00:00.000Z",
+      "date": "2026-04-23",
+      "away": "Cleveland Cavaliers",
+      "away_abbr": "CLE",
+      "away_score": 104,
+      "home": "Toronto Raptors",
+      "home_abbr": "TOR",
+      "home_score": 126,
+      "winner": "Toronto Raptors",
+      "loser": "Cleveland Cavaliers",
+      "margin": 22,
+      "closeness": 2,
+      "rating": "Not close",
+      "dots": "\u25cf\u25cf\u25cb\u25cb\u25cb"
+    },
+    {
+      "id": 21681979,
+      "datetime": "2026-04-24T01:30:00.000Z",
+      "date": "2026-04-23",
+      "away": "Denver Nuggets",
+      "away_abbr": "DEN",
+      "away_score": 96,
+      "home": "Minnesota Timberwolves",
+      "home_abbr": "MIN",
+      "home_score": 113,
+      "winner": "Minnesota Timberwolves",
+      "loser": "Denver Nuggets",
+      "margin": 17,
+      "closeness": 2,
+      "rating": "Not close",
+      "dots": "\u25cf\u25cf\u25cb\u25cb\u25cb"
+    }
+  ]
+}

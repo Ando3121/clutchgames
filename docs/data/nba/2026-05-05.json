@@ -1,0 +1,40 @@
+{
+  "sport": "nba",
+  "date": "2026-05-05",
+  "games": [
+    {
+      "id": 21709219,
+      "datetime": "2026-05-05T23:00:00.000Z",
+      "date": "2026-05-05",
+      "away": "Cleveland Cavaliers",
+      "away_abbr": "CLE",
+      "away_score": 101,
+      "home": "Detroit Pistons",
+      "home_abbr": "DET",
+      "home_score": 111,
+      "winner": "Detroit Pistons",
+      "loser": "Cleveland Cavaliers",
+      "margin": 10,
+      "closeness": 3,
+      "rating": "Some drama",
+      "dots": "\u25cf\u25cf\u25cf\u25cb\u25cb"
+    },
+    {
+      "id": 21708299,
+      "datetime": "2026-05-06T00:30:00.000Z",
+      "date": "2026-05-05",
+      "away": "Los Angeles Lakers",
+      "away_abbr": "LAL",
+      "away_score": 90,
+      "home": "Oklahoma City Thunder",
+      "home_abbr": "OKC",
+      "home_score": 108,
+      "winner": "Oklahoma City Thunder",
+      "loser": "Los Angeles Lakers",
+      "margin": 18,
+      "closeness": 2,
+      "rating": "Not close",
+      "dots": "\u25cf\u25cf\u25cb\u25cb\u25cb"
+    }
+  ]
+}

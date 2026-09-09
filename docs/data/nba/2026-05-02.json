@@ -1,0 +1,23 @@
+{
+  "sport": "nba",
+  "date": "2026-05-02",
+  "games": [
+    {
+      "id": 21682743,
+      "datetime": "2026-05-02T23:30:00.000Z",
+      "date": "2026-05-02",
+      "away": "Philadelphia 76ers",
+      "away_abbr": "PHI",
+      "away_score": 109,
+      "home": "Boston Celtics",
+      "home_abbr": "BOS",
+      "home_score": 100,
+      "winner": "Philadelphia 76ers",
+      "loser": "Boston Celtics",
+      "margin": 9,
+      "closeness": 3,
+      "rating": "Some drama",
+      "dots": "\u25cf\u25cf\u25cf\u25cb\u25cb"
+    }
+  ]
+}

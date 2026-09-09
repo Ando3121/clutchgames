@@ -1,0 +1,23 @@
+{
+  "sport": "nba",
+  "date": "2026-05-13",
+  "games": [
+    {
+      "id": 21709235,
+      "datetime": "2026-05-14T00:00:00.000Z",
+      "date": "2026-05-13",
+      "away": "Cleveland Cavaliers",
+      "away_abbr": "CLE",
+      "away_score": 117,
+      "home": "Detroit Pistons",
+      "home_abbr": "DET",
+      "home_score": 113,
+      "winner": "Cleveland Cavaliers",
+      "loser": "Detroit Pistons",
+      "margin": 4,
+      "closeness": 5,
+      "rating": "Thriller",
+      "dots": "\u25cf\u25cf\u25cf\u25cf\u25cf"
+    }
+  ]
+}

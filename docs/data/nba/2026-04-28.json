@@ -1,0 +1,57 @@
+{
+  "sport": "nba",
+  "date": "2026-04-28",
+  "games": [
+    {
+      "id": 21682732,
+      "datetime": "2026-04-28T23:00:00.000Z",
+      "date": "2026-04-28",
+      "away": "Philadelphia 76ers",
+      "away_abbr": "PHI",
+      "away_score": 113,
+      "home": "Boston Celtics",
+      "home_abbr": "BOS",
+      "home_score": 97,
+      "winner": "Philadelphia 76ers",
+      "loser": "Boston Celtics",
+      "margin": 16,
+      "closeness": 2,
+      "rating": "Not close",
+      "dots": "\u25cf\u25cf\u25cb\u25cb\u25cb"
+    },
+    {
+      "id": 21681988,
+      "datetime": "2026-04-29T00:00:00.000Z",
+      "date": "2026-04-28",
+      "away": "Atlanta Hawks",
+      "away_abbr": "ATL",
+      "away_score": 97,
+      "home": "New York Knicks",
+      "home_abbr": "NYK",
+      "home_score": 126,
+      "winner": "New York Knicks",
+      "loser": "Atlanta Hawks",
+      "margin": 29,
+      "closeness": 1,
+      "rating": "Blowout",
+      "dots": "\u25cf\u25cb\u25cb\u25cb\u25cb"
+    },
+    {
+      "id": 21681989,
+      "datetime": "2026-04-29T01:30:00.000Z",
+      "date": "2026-04-28",
+      "away": "Portland Trail Blazers",
+      "away_abbr": "POR",
+      "away_score": 95,
+      "home": "San Antonio Spurs",
+      "home_abbr": "SAS",
+      "home_score": 114,
+      "winner": "San Antonio Spurs",
+      "loser": "Portland Trail Blazers",
+      "margin": 19,
+      "closeness": 2,
+      "rating": "Not close",
+      "dots": "\u25cf\u25cf\u25cb\u25cb\u25cb"
+    }
+  ]
+}

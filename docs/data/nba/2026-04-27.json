@@ -1,0 +1,57 @@
+{
+  "sport": "nba",
+  "date": "2026-04-27",
+  "games": [
+    {
+      "id": 21684800,
+      "datetime": "2026-04-28T00:00:00.000Z",
+      "date": "2026-04-27",
+      "away": "Detroit Pistons",
+      "away_abbr": "DET",
+      "away_score": 88,
+      "home": "Orlando Magic",
+      "home_abbr": "ORL",
+      "home_score": 94,
+      "winner": "Orlando Magic",
+      "loser": "Detroit Pistons",
+      "margin": 6,
+      "closeness": 4,
+      "rating": "Competitive",
+      "dots": "\u25cf\u25cf\u25cf\u25cf\u25cb"
+    },
+    {
+      "id": 21684902,
+      "datetime": "2026-04-28T01:30:00.000Z",
+      "date": "2026-04-27",
+      "away": "Oklahoma City Thunder",
+      "away_abbr": "OKC",
+      "away_score": 131,
+      "home": "Phoenix Suns",
+      "home_abbr": "PHX",
+      "home_score": 122,
+      "winner": "Oklahoma City Thunder",
+      "loser": "Phoenix Suns",
+      "margin": 9,
+      "closeness": 3,
+      "rating": "Some drama",
+      "dots": "\u25cf\u25cf\u25cf\u25cb\u25cb"
+    },
+    {
+      "id": 21681987,
+      "datetime": "2026-04-28T02:30:00.000Z",
+      "date": "2026-04-27",
+      "away": "Minnesota Timberwolves",
+      "away_abbr": "MIN",
+      "away_score": 113,
+      "home": "Denver Nuggets",
+      "home_abbr": "DEN",
+      "home_score": 125,
+      "winner": "Denver Nuggets",
+      "loser": "Minnesota Timberwolves",
+      "margin": 12,
+      "closeness": 3,
+      "rating": "Some drama",
+      "dots": "\u25cf\u25cf\u25cf\u25cb\u25cb"
+    }
+  ]
+}

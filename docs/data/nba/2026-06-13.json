@@ -1,0 +1,23 @@
+{
+  "sport": "nba",
+  "date": "2026-06-13",
+  "games": [
+    {
+      "id": 21716138,
+      "datetime": "2026-06-14T00:30:00.000Z",
+      "date": "2026-06-13",
+      "away": "New York Knicks",
+      "away_abbr": "NYK",
+      "away_score": 94,
+      "home": "San Antonio Spurs",
+      "home_abbr": "SAS",
+      "home_score": 90,
+      "winner": "New York Knicks",
+      "loser": "San Antonio Spurs",
+      "margin": 4,
+      "closeness": 5,
+      "rating": "Thriller",
+      "dots": "\u25cf\u25cf\u25cf\u25cf\u25cf"
+    }
+  ]
+}

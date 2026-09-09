@@ -1,0 +1,57 @@
+{
+  "sport": "nba",
+  "date": "2026-05-01",
+  "games": [
+    {
+      "id": 21684812,
+      "datetime": "2026-05-01T23:00:00.000Z",
+      "date": "2026-05-01",
+      "away": "Detroit Pistons",
+      "away_abbr": "DET",
+      "away_score": 93,
+      "home": "Orlando Magic",
+      "home_abbr": "ORL",
+      "home_score": 79,
+      "winner": "Detroit Pistons",
+      "loser": "Orlando Magic",
+      "margin": 14,
+      "closeness": 3,
+      "rating": "Some drama",
+      "dots": "\u25cf\u25cf\u25cf\u25cb\u25cb"
+    },
+    {
+      "id": 21681995,
+      "datetime": "2026-05-01T23:30:00.000Z",
+      "date": "2026-05-01",
+      "away": "Cleveland Cavaliers",
+      "away_abbr": "CLE",
+      "away_score": 110,
+      "home": "Toronto Raptors",
+      "home_abbr": "TOR",
+      "home_score": 112,
+      "winner": "Toronto Raptors",
+      "loser": "Cleveland Cavaliers",
+      "margin": 2,
+      "closeness": 5,
+      "rating": "Thriller",
+      "dots": "\u25cf\u25cf\u25cf\u25cf\u25cf"
+    },
+    {
+      "id": 21681996,
+      "datetime": "2026-05-02T01:30:00.000Z",
+      "date": "2026-05-01",
+      "away": "Los Angeles Lakers",
+      "away_abbr": "LAL",
+      "away_score": 98,
+      "home": "Houston Rockets",
+      "home_abbr": "HOU",
+      "home_score": 78,
+      "winner": "Los Angeles Lakers",
+      "loser": "Houston Rockets",
+      "margin": 20,
+      "closeness": 2,
+      "rating": "Not close",
+      "dots": "\u25cf\u25cf\u25cb\u25cb\u25cb"
+    }
+  ]
+}

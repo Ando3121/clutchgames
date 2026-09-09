@@ -1,0 +1,23 @@
+{
+  "sport": "nba",
+  "date": "2026-05-23",
+  "games": [
+    {
+      "id": 21713899,
+      "datetime": "2026-05-24T00:00:00.000Z",
+      "date": "2026-05-23",
+      "away": "New York Knicks",
+      "away_abbr": "NYK",
+      "away_score": 121,
+      "home": "Cleveland Cavaliers",
+      "home_abbr": "CLE",
+      "home_score": 108,
+      "winner": "New York Knicks",
+      "loser": "Cleveland Cavaliers",
+      "margin": 13,
+      "closeness": 3,
+      "rating": "Some drama",
+      "dots": "\u25cf\u25cf\u25cf\u25cb\u25cb"
+    }
+  ]
+}

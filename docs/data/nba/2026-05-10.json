@@ -1,0 +1,40 @@
+{
+  "sport": "nba",
+  "date": "2026-05-10",
+  "games": [
+    {
+      "id": 21708680,
+      "datetime": "2026-05-10T19:30:00.000Z",
+      "date": "2026-05-10",
+      "away": "New York Knicks",
+      "away_abbr": "NYK",
+      "away_score": 144,
+      "home": "Philadelphia 76ers",
+      "home_abbr": "PHI",
+      "home_score": 114,
+      "winner": "New York Knicks",
+      "loser": "Philadelphia 76ers",
+      "margin": 30,
+      "closeness": 1,
+      "rating": "Blowout",
+      "dots": "\u25cf\u25cb\u25cb\u25cb\u25cb"
+    },
+    {
+      "id": 21707975,
+      "datetime": "2026-05-10T23:30:00.000Z",
+      "date": "2026-05-10",
+      "away": "San Antonio Spurs",
+      "away_abbr": "SAS",
+      "away_score": 109,
+      "home": "Minnesota Timberwolves",
+      "home_abbr": "MIN",
+      "home_score": 114,
+      "winner": "Minnesota Timberwolves",
+      "loser": "San Antonio Spurs",
+      "margin": 5,
+      "closeness": 4,
+      "rating": "Competitive",
+      "dots": "\u25cf\u25cf\u25cf\u25cf\u25cb"
+    }
+  ]
+}
