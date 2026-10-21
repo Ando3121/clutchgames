@@ -1,0 +1,23 @@
+{
+  "sport": "nba",
+  "date": "2026-10-20",
+  "games": [
+    {
+      "id": 21717855,
+      "datetime": "2026-10-20T19:00:00.000Z",
+      "date": "2026-10-20",
+      "away": "Boston Celtics",
+      "away_abbr": "BOS",
+      "away_score": 113,
+      "home": "Detroit Pistons",
+      "home_abbr": "DET",
+      "home_score": 121,
+      "winner": "Detroit Pistons",
+      "loser": "Boston Celtics",
+      "margin": 8,
+      "closeness": 4,
+      "rating": "Competitive",
+      "dots": "\u25cf\u25cf\u25cf\u25cf\u25cb"
+    }
+  ]
+}
