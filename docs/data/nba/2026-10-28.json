@@ -1,0 +1,40 @@
+{
+  "sport": "nba",
+  "date": "2026-10-28",
+  "games": [
+    {
+      "id": 21717975,
+      "datetime": "2026-10-28T23:00:00.000Z",
+      "date": "2026-10-28",
+      "away": "Miami Heat",
+      "away_abbr": "MIA",
+      "away_score": 129,
+      "home": "Atlanta Hawks",
+      "home_abbr": "ATL",
+      "home_score": 117,
+      "winner": "Miami Heat",
+      "loser": "Atlanta Hawks",
+      "margin": 12,
+      "closeness": 3,
+      "rating": "Some drama",
+      "dots": "\u25cf\u25cf\u25cf\u25cb\u25cb"
+    },
+    {
+      "id": 21717976,
+      "datetime": "2026-10-28T23:00:00.000Z",
+      "date": "2026-10-28",
+      "away": "Washington Wizards",
+      "away_abbr": "WAS",
+      "away_score": 111,
+      "home": "Cleveland Cavaliers",
+      "home_abbr": "CLE",
+      "home_score": 121,
+      "winner": "Cleveland Cavaliers",
+      "loser": "Washington Wizards",
+      "margin": 10,
+      "closeness": 3,
+      "rating": "Some drama",
+      "dots": "\u25cf\u25cf\u25cf\u25cb\u25cb"
+    }
+  ]
+}
