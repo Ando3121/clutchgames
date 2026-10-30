@@ -1,0 +1,57 @@
+{
+  "sport": "nba",
+  "date": "2026-10-29",
+  "games": [
+    {
+      "id": 21717987,
+      "datetime": "2026-10-30T00:00:00.000Z",
+      "date": "2026-10-29",
+      "away": "Cleveland Cavaliers",
+      "away_abbr": "CLE",
+      "away_score": 111,
+      "home": "Atlanta Hawks",
+      "home_abbr": "ATL",
+      "home_score": 114,
+      "winner": "Atlanta Hawks",
+      "loser": "Cleveland Cavaliers",
+      "margin": 3,
+      "closeness": 5,
+      "rating": "Thriller",
+      "dots": "\u25cf\u25cf\u25cf\u25cf\u25cf"
+    },
+    {
+      "id": 21717988,
+      "datetime": "2026-10-30T00:00:00.000Z",
+      "date": "2026-10-29",
+      "away": "Sacramento Kings",
+      "away_abbr": "SAC",
+      "away_score": 120,
+      "home": "New Orleans Pelicans",
+      "home_abbr": "NOP",
+      "home_score": 132,
+      "winner": "New Orleans Pelicans",
+      "loser": "Sacramento Kings",
+      "margin": 12,
+      "closeness": 3,
+      "rating": "Some drama",
+      "dots": "\u25cf\u25cf\u25cf\u25cb\u25cb"
+    },
+    {
+      "id": 21717989,
+      "datetime": "2026-10-30T02:00:00.000Z",
+      "date": "2026-10-29",
+      "away": "Memphis Grizzlies",
+      "away_abbr": "MEM",
+      "away_score": 124,
+      "home": "Portland Trail Blazers",
+      "home_abbr": "POR",
+      "home_score": 103,
+      "winner": "Memphis Grizzlies",
+      "loser": "Portland Trail Blazers",
+      "margin": 21,
+      "closeness": 2,
+      "rating": "Not close",
+      "dots": "\u25cf\u25cf\u25cb\u25cb\u25cb"
+    }
+  ]
+}
