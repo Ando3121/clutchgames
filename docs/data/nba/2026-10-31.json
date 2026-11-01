@@ -1,0 +1,23 @@
+{
+  "sport": "nba",
+  "date": "2026-10-31",
+  "games": [
+    {
+      "id": 21718001,
+      "datetime": "2026-10-31T19:00:00.000Z",
+      "date": "2026-10-31",
+      "away": "Portland Trail Blazers",
+      "away_abbr": "POR",
+      "away_score": 112,
+      "home": "Utah Jazz",
+      "home_abbr": "UTA",
+      "home_score": 90,
+      "winner": "Portland Trail Blazers",
+      "loser": "Utah Jazz",
+      "margin": 22,
+      "closeness": 2,
+      "rating": "Not close",
+      "dots": "\u25cf\u25cf\u25cb\u25cb\u25cb"
+    }
+  ]
+}
