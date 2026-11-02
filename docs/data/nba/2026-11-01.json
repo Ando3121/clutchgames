@@ -35,6 +35,40 @@
       "closeness": 4,
       "rating": "Competitive",
       "dots": "\u25cf\u25cf\u25cf\u25cf\u25cb"
+    },
+    {
+      "id": 21718010,
+      "datetime": "2026-11-02T01:30:00.000Z",
+      "date": "2026-11-01",
+      "away": "LA Clippers",
+      "away_abbr": "LAC",
+      "away_score": 112,
+      "home": "Golden State Warriors",
+      "home_abbr": "GSW",
+      "home_score": 124,
+      "winner": "Golden State Warriors",
+      "loser": "LA Clippers",
+      "margin": 12,
+      "closeness": 3,
+      "rating": "Some drama",
+      "dots": "\u25cf\u25cf\u25cf\u25cb\u25cb"
+    },
+    {
+      "id": 21718011,
+      "datetime": "2026-11-02T02:00:00.000Z",
+      "date": "2026-11-01",
+      "away": "Toronto Raptors",
+      "away_abbr": "TOR",
+      "away_score": 125,
+      "home": "Los Angeles Lakers",
+      "home_abbr": "LAL",
+      "home_score": 131,
+      "winner": "Los Angeles Lakers",
+      "loser": "Toronto Raptors",
+      "margin": 6,
+      "closeness": 4,
+      "rating": "Competitive",
+      "dots": "\u25cf\u25cf\u25cf\u25cf\u25cb"
     }
   ]
 }
