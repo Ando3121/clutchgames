@@ -1,0 +1,23 @@
+{
+  "sport": "nba",
+  "date": "2026-11-07",
+  "games": [
+    {
+      "id": 21718052,
+      "datetime": "2026-11-07T22:00:00.000Z",
+      "date": "2026-11-07",
+      "away": "Denver Nuggets",
+      "away_abbr": "DEN",
+      "away_score": 114,
+      "home": "Indiana Pacers",
+      "home_abbr": "IND",
+      "home_score": 102,
+      "winner": "Denver Nuggets",
+      "loser": "Indiana Pacers",
+      "margin": 12,
+      "closeness": 3,
+      "rating": "Some drama",
+      "dots": "\u25cf\u25cf\u25cf\u25cb\u25cb"
+    }
+  ]
+}
