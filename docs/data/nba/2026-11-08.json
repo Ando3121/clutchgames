@@ -1,0 +1,23 @@
+{
+  "sport": "nba",
+  "date": "2026-11-08",
+  "games": [
+    {
+      "id": 21718059,
+      "datetime": "2026-11-08T20:30:00.000Z",
+      "date": "2026-11-08",
+      "away": "Philadelphia 76ers",
+      "away_abbr": "PHI",
+      "away_score": 127,
+      "home": "Chicago Bulls",
+      "home_abbr": "CHI",
+      "home_score": 121,
+      "winner": "Philadelphia 76ers",
+      "loser": "Chicago Bulls",
+      "margin": 6,
+      "closeness": 4,
+      "rating": "Competitive",
+      "dots": "\u25cf\u25cf\u25cf\u25cf\u25cb"
+    }
+  ]
+}
