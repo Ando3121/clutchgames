@@ -1,0 +1,23 @@
+{
+  "sport": "nba",
+  "date": "2026-11-11",
+  "games": [
+    {
+      "id": 21718081,
+      "datetime": "2026-11-12T00:00:00.000Z",
+      "date": "2026-11-11",
+      "away": "Washington Wizards",
+      "away_abbr": "WAS",
+      "away_score": 101,
+      "home": "Indiana Pacers",
+      "home_abbr": "IND",
+      "home_score": 114,
+      "winner": "Indiana Pacers",
+      "loser": "Washington Wizards",
+      "margin": 13,
+      "closeness": 3,
+      "rating": "Some drama",
+      "dots": "\u25cf\u25cf\u25cf\u25cb\u25cb"
+    }
+  ]
+}
