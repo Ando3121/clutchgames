@@ -120,6 +120,23 @@
       "closeness": 2,
       "rating": "Not close",
       "dots": "\u25cf\u25cf\u25cb\u25cb\u25cb"
+    },
+    {
+      "id": 21718125,
+      "datetime": "2026-11-17T02:00:00.000Z",
+      "date": "2026-11-16",
+      "away": "Phoenix Suns",
+      "away_abbr": "PHX",
+      "away_score": 117,
+      "home": "Denver Nuggets",
+      "home_abbr": "DEN",
+      "home_score": 105,
+      "winner": "Phoenix Suns",
+      "loser": "Denver Nuggets",
+      "margin": 12,
+      "closeness": 3,
+      "rating": "Some drama",
+      "dots": "\u25cf\u25cf\u25cf\u25cb\u25cb"
     }
   ]
 }
