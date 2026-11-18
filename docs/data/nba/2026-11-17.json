@@ -1,0 +1,23 @@
+{
+  "sport": "nba",
+  "date": "2026-11-17",
+  "games": [
+    {
+      "id": 21718126,
+      "datetime": "2026-11-18T00:30:00.000Z",
+      "date": "2026-11-17",
+      "away": "New York Knicks",
+      "away_abbr": "NYK",
+      "away_score": 111,
+      "home": "Toronto Raptors",
+      "home_abbr": "TOR",
+      "home_score": 102,
+      "winner": "New York Knicks",
+      "loser": "Toronto Raptors",
+      "margin": 9,
+      "closeness": 3,
+      "rating": "Some drama",
+      "dots": "\u25cf\u25cf\u25cf\u25cb\u25cb"
+    }
+  ]
+}
