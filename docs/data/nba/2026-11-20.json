@@ -1,0 +1,23 @@
+{
+  "sport": "nba",
+  "date": "2026-11-20",
+  "games": [
+    {
+      "id": 21718147,
+      "datetime": "2026-11-21T00:00:00.000Z",
+      "date": "2026-11-20",
+      "away": "Charlotte Hornets",
+      "away_abbr": "CHA",
+      "away_score": 97,
+      "home": "Atlanta Hawks",
+      "home_abbr": "ATL",
+      "home_score": 111,
+      "winner": "Atlanta Hawks",
+      "loser": "Charlotte Hornets",
+      "margin": 14,
+      "closeness": 3,
+      "rating": "Some drama",
+      "dots": "\u25cf\u25cf\u25cf\u25cb\u25cb"
+    }
+  ]
+}
