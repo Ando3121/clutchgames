@@ -1,0 +1,23 @@
+{
+  "sport": "nba",
+  "date": "2026-11-21",
+  "games": [
+    {
+      "id": 21718156,
+      "datetime": "2026-11-21T18:00:00.000Z",
+      "date": "2026-11-21",
+      "away": "Milwaukee Bucks",
+      "away_abbr": "MIL",
+      "away_score": 129,
+      "home": "Philadelphia 76ers",
+      "home_abbr": "PHI",
+      "home_score": 132,
+      "winner": "Philadelphia 76ers",
+      "loser": "Milwaukee Bucks",
+      "margin": 3,
+      "closeness": 5,
+      "rating": "Thriller",
+      "dots": "\u25cf\u25cf\u25cf\u25cf\u25cf"
+    }
+  ]
+}
