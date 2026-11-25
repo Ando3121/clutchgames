@@ -35,6 +35,23 @@
       "closeness": 2,
       "rating": "Not close",
       "dots": "\u25cf\u25cf\u25cb\u25cb\u25cb"
+    },
+    {
+      "id": 21718183,
+      "datetime": "2026-11-25T03:00:00.000Z",
+      "date": "2026-11-24",
+      "away": "Dallas Mavericks",
+      "away_abbr": "DAL",
+      "away_score": 120,
+      "home": "Denver Nuggets",
+      "home_abbr": "DEN",
+      "home_score": 101,
+      "winner": "Dallas Mavericks",
+      "loser": "Denver Nuggets",
+      "margin": 19,
+      "closeness": 2,
+      "rating": "Not close",
+      "dots": "\u25cf\u25cf\u25cb\u25cb\u25cb"
     }
   ]
 }
