@@ -103,6 +103,57 @@
       "closeness": 4,
       "rating": "Competitive",
       "dots": "\u25cf\u25cf\u25cf\u25cf\u25cb"
+    },
+    {
+      "id": 21718190,
+      "datetime": "2026-11-26T01:30:00.000Z",
+      "date": "2026-11-25",
+      "away": "Phoenix Suns",
+      "away_abbr": "PHX",
+      "away_score": 104,
+      "home": "Houston Rockets",
+      "home_abbr": "HOU",
+      "home_score": 116,
+      "winner": "Houston Rockets",
+      "loser": "Phoenix Suns",
+      "margin": 12,
+      "closeness": 3,
+      "rating": "Some drama",
+      "dots": "\u25cf\u25cf\u25cf\u25cb\u25cb"
+    },
+    {
+      "id": 21718191,
+      "datetime": "2026-11-26T03:00:00.000Z",
+      "date": "2026-11-25",
+      "away": "Sacramento Kings",
+      "away_abbr": "SAC",
+      "away_score": 110,
+      "home": "Golden State Warriors",
+      "home_abbr": "GSW",
+      "home_score": 129,
+      "winner": "Golden State Warriors",
+      "loser": "Sacramento Kings",
+      "margin": 19,
+      "closeness": 2,
+      "rating": "Not close",
+      "dots": "\u25cf\u25cf\u25cb\u25cb\u25cb"
+    },
+    {
+      "id": 21718192,
+      "datetime": "2026-11-26T03:00:00.000Z",
+      "date": "2026-11-25",
+      "away": "San Antonio Spurs",
+      "away_abbr": "SAS",
+      "away_score": 111,
+      "home": "Portland Trail Blazers",
+      "home_abbr": "POR",
+      "home_score": 116,
+      "winner": "Portland Trail Blazers",
+      "loser": "San Antonio Spurs",
+      "margin": 5,
+      "closeness": 4,
+      "rating": "Competitive",
+      "dots": "\u25cf\u25cf\u25cf\u25cf\u25cb"
     }
   ]
 }
